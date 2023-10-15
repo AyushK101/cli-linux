@@ -1,4 +1,8 @@
-# ;)
+# ;) 
+
+ ## kernel 
+- Its a low level program interfacing with the hardware (CPU, RAM, disks) on top of which applications are running.
+- Kernel directly interacts with the hardware by accepting machine understandable language from the shell.
 
  ## console
 - A `physical or virtual device` that allows users to interact with a computer system, often providing a combination of text-based input and output.
@@ -8,6 +12,7 @@
 
 ## shell
 - A `command interpreter program` (like a `compiler`) that enables users to interact with an operating system, executing commands and scripts.
+- A shell is basically an interface present between the kernel and the user.
 
 ## CLI (command line interface)
 - The `interface(provided by terminal)` where users can input commands and execute them to perform specific tasks or operations.
@@ -31,6 +36,8 @@
 - `command `_-options_  _arguments_
 - `arguments` : values that we provide to commands.
 - `options/flags` : modify the behavior of the commands in predefined way. Prefixed by `-`. ex : `-m`
+
+> Options and flags are both types of parameters that you can add to a command after its name. However, they have some differences in how they are written and what they do. Options are usually single letters that start with a dash (-), such as -a, -b, or -c. Flags are usually longer words that start with two dashes (--), such as --all, --verbose, or --help. Options can sometimes take an additional value after them, such as -n 5 or -f filename. Flags usually do not take values, but they can be combined with an equal sign and a value, such as --size=10 or --color=red.
 
 ### combining options 
 - we can provide multiple options at once in 2 ways 
@@ -141,7 +148,8 @@
 - `head -n  <filename>` : prints first n lines of file
 - `tail -n  <filename>` : prints last n lines of file
 - `wc` : tell count of words or lines or bytes 
-- `sort`: by default sort a file alphabetically. : `-k<n>`sorting of column number n.
+- `sort`: by default sort a file alphabetically. : `-k<n>`sorting of column number n. , `-u` unique flag
+- 
 
 # redirection 
 - redirection describes the way we can alter the source of standard input , and the destinations for standard output and error.
@@ -210,18 +218,58 @@
 - tee reads standard input and copies both to standard output and to a file . This allows us to capture information part of the way through a pipeline , without interrupting the flow .
 - `cat file1.txt file2.txt ... | tee <saving-file> | commands ...`
 
-## expansion : pathname , tilde , brace , arithmatic , quoting , command substitution expansions 
-- __wildcard characters__ : special characters that can `stand in for unknown characters in a text value`. These are expanded by shell (before command execution).
-
-### pathname expansion
-- we can use wildcard characters to build patterns that can match multiple file names at once.
-1. the `*` represents zero or more characters in a filename . ex: `ls *.html`       
-2. the `?` represents exactly one or any single character. ex: `ls pic??.png`
-3. the inside `[]` we can specify a range of characters to match. ex: 
 
 
 
 
+# expansion & substitution 
+- __wildcard characters__ : special characters that can `stand in for unknown characters in a text value`. These are expanded by shell (before command execution). ex: ` * , ? , [] , ^ , character classes `
+
+## pathname expansion 
+
+### * 
+- the * represents __zero or more__ character in a file name. ex: ` ls *.html` , `cat *b* ` , `ls blue*` 
+
+### ? 
+- the ? represents any __single__ character . ex: `ls app.??` , `ls pic?ero.png`, `echo *.???`etc 
+
+### []
+- inside [] we can specify a range of characters to match .
+ex: `ls pic[123],png` will only match pic1.png , pic2.png and pic3.png  
+`ls file[0-9]` will match from file1 to file9  
+`ls [A-F]*` , `ls *[a-z]` etc 
+
+### negative ranges [^]
+- `ls [^a]*` will match any file that don't start with "a"  
+
+## tilde expansion 
+- `~` == home directory 
+
+## brace expansion 
+- used to generate multiple arbitrary strings based on a pattern . We provide a set of strings inside `{}` 
+and optional surrounding prefixes and suffixes .
+- `touch Day-{M,T,W,T,F,S,23}-planner_{am,pm}.txt` 
+> __ranges__ : we can provide a numeric range , which will be used to generate a sequence    
+ex: `mkdir jan{1..31}`|| `echo {2..10..2}`(interval) || `touch group-{a..e}.txt` || `mkdir -p {mon,tue,wed}/{breakfast,lunch,dinner}` || ` echo {x,y{1..5},z,g}`
+
+## arithmetic expansion 
+- the shell will perform , using the `$((expression))` syntax. `+,-,*,/,%,**`   
+ex: `echo $((43982*32))`
+> always whole number 
+
+## quoting 
+- shell ignore two or more spaces , bcz it performs `word splitting`.
+- when hit `$` , it tells shell to find variable 
+> double quote ""
+- respect spacing , but ignore special character expect  ` $ , \ , backtick `
+> single quote ''
+- suppress all forms of substitution 
+
+## command substitution 
+- `$(command)` syntax to display the output of another command .  
+ex: `echo today is $(date -l)`
+> another syntax : `command` ex: `echo who am i ? `whoami` !`
 
 
-
+# finding files 
+- 
