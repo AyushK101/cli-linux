@@ -1,5 +1,5 @@
 # ;) 
-
+>> always check for google for commands like gfg , don't MUG-UP .
  ## kernel 
 - Its a low level program interfacing with the hardware (CPU, RAM, disks) on top of which applications are running.
 - Kernel directly interacts with the hardware by accepting machine understandable language from the shell.
@@ -272,4 +272,32 @@ ex: `echo today is $(date -l)`
 
 
 # finding files 
-- 
+- `locate` : performs a search of pathnames across our machine that a given `substring` and then prints out any matching names 
+> its speedy because it uses a pre-generated database file rather than searching the entire machine .
+
+- `find` : more powerful but slower than locate . 
+> `find -type f` : will limit the search to files 
+> `find -type d` : will limit the search to directories 
+## finding by name 
+- we can provide a specific pattern for find to use when matching filenames and directories with the `-name` option , we need to enclose out pattern is quotes . ex: `find ~/Desktop -name "*.txt"` 
+- for case insensitive `-iname`
+- `-size` option for finding the size . ex: `find -size +1G` : find file larger than 1 GB :: `find -size -50M` 
+> every file has an owner 
+
+### Timestamps (not good yet)
+1. `mtime` : modification time : is when a file was last modified (`contents last changed`) ex: `ls -l` shows mtime
+2. `ctime` : change time : this occurs anytime `mtime` changes but also when we `rename a file , move it or alter permissions .`
+3. `atime` : access time : updated when a file is `read by an application or a command` like cat . ex: `ls -lu`
+
+### logical operators 
+- `-and` , `-or` , `-not` 
+
+## User-defined Actions 
+- `find -exec command  '{}'  ';' `
+
+## xargs 
+- we can use a special command called xargs to build up the input into a bundle that will be provided as an argument list to the next command while the exec runs again for every output it shows .
+
+
+
+
